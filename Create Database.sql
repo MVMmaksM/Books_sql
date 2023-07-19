@@ -23,13 +23,21 @@ CREATE TABLE [dbo].[book]
 	[country_id] INT NOT NULL,
 	[description] NVARCHAR(MAX) NOT NULL,
 	[published_year] DATE,
-	[isbn] TINYINT NOT NULL,
-	[udk] NVARCHAR(10) NOT NULL,
-	[bbk] NVARCHAR(10) NOT NULL,
+	[isbn] NVARCHAR(24) NOT NULL,
+	[udk] NVARCHAR(24) NOT NULL,
+	[bbk] NVARCHAR(24) NOT NULL,
 	[price] MONEY NOT NULL,
 
 	CONSTRAINT PK__book PRIMARY KEY CLUSTERED (id),
-	CONSTRAINT FK__book_country_id FOREIGN KEY (country_id) REFERENCES [dbo].[Country] (id)
+	CONSTRAINT FK__book_country_id FOREIGN KEY (country_id) REFERENCES [dbo].[country] (id)
+)
+GO
+CREATE TABLE [dbo].[region]
+(	
+	[kod] INT NOT NULL,
+	[name] NVARCHAR(64) NOT NULL,
+
+	CONSTRAINT PK__region PRIMARY KEY CLUSTERED(kod)
 )
 GO
 CREATE TABLE [dbo].[city]
@@ -37,8 +45,10 @@ CREATE TABLE [dbo].[city]
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[name] NVARCHAR(255) NOT NULL,
 	[days_delivery] INT NOT NULL,
+	[region_kod] INT NOT NULL,
 
-	CONSTRAINT PK__city PRIMARY KEY CLUSTERED(id)
+	CONSTRAINT PK__city PRIMARY KEY CLUSTERED(id),
+	CONSTRAINT FK__city_region_id FOREIGN KEY (region_kod) REFERENCES [dbo].[region](kod)
 )
 GO
 CREATE TABLE [dbo].[client]
@@ -47,7 +57,7 @@ CREATE TABLE [dbo].[client]
 	[first_name] NVARCHAR(64) NOT NULL,
 	[last_name] NVARCHAR(64) NOT NULL,
 	[city_id] INT NOT NULL,
-	[telephone] NVARCHAR(12) NOT NULL,
+	[telephone] NVARCHAR(24) NOT NULL,
 	[email] NVARCHAR(255) NOT NULL,
 
 	CONSTRAINT PK__client PRIMARY KEY CLUSTERED (id),
@@ -60,10 +70,11 @@ CREATE TABLE [dbo].[publishing_house]
 (
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[name] NVARCHAR(255) NOT NULL,
+	[index] INT NOT NULL,
 	[city_id] INT NOT NULL,
 	[country_id] INT NOT NULL,
 	[address] NVARCHAR(255) NOT NULL,
-	[telephone] NVARCHAR(12) NOT NULL,
+	[telephone] NVARCHAR(64) NOT NULL,
 	[email] NVARCHAR(255) NOT NULL,
 	
 	CONSTRAINT PK__publishing_house PRIMARY KEY CLUSTERED(id),
@@ -97,6 +108,7 @@ CREATE TABLE [dbo].[author]
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[first_name] NVARCHAR(255) NOT NULL,
 	[last_name] NVARCHAR(255) NOT NULL,
+	[surname] NVARCHAR(255) NOT NULL,
 
 	CONSTRAINT PK__author PRIMARY KEY CLUSTERED(id)
 )
