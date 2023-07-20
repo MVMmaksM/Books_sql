@@ -27,6 +27,7 @@ CREATE TABLE [dbo].[book]
 	[udk] NVARCHAR(24) NOT NULL,
 	[bbk] NVARCHAR(24) NOT NULL,
 	[price] MONEY NOT NULL,
+	[pages] INT NOT NULL,
 
 	CONSTRAINT PK__book PRIMARY KEY CLUSTERED (id),
 	CONSTRAINT FK__book_country_id FOREIGN KEY (country_id) REFERENCES [dbo].[country] (id)
@@ -108,7 +109,7 @@ CREATE TABLE [dbo].[author]
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[first_name] NVARCHAR(255) NOT NULL,
 	[last_name] NVARCHAR(255) NOT NULL,
-	[surname] NVARCHAR(255) NOT NULL,
+	[surname] NVARCHAR(255) NULL,
 
 	CONSTRAINT PK__author PRIMARY KEY CLUSTERED(id)
 )
