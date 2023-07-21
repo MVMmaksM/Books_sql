@@ -2258,7 +2258,7 @@ VALUES('1', '10'),
 GO
 DELETE FROM [dbo].[order]
 GO
-INSERT INTO [dbo].[order]([client_id], [delivery_id], [description])
+INSERT INTO [dbo].[order]([client_id], [delivery_id], [comment])
 VALUES('1', '1', NULL),
 ('1', '2', NULL),
 ('1', '2', NULL),

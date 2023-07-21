@@ -174,7 +174,7 @@ GROUP BY author_book.book_id) query_author ON b.id = query_author.book_id
 INNER JOIN (SELECT gb.book_id, STRING_AGG(g.name, ', ') AS 'Жанр'
 FROM genre g INNER JOIN genre_book gb ON g.id = gb.genre_id
 GROUP BY gb.book_id) query_genre ON b.id = query_genre.book_id
-WHERE b.title_ru LIKE '%'+ @title_eng + '%'
+WHERE b.title_eng LIKE '%'+ @title_eng + '%'
 ORDER BY b.title_eng
 GO
 IF OBJECT_ID('sp_get_book_by_publishing_house', 'P') IS NOT NULL
