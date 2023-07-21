@@ -25,12 +25,34 @@ CREATE TABLE [dbo].[book]
 	[published_year] DATE,
 	[isbn] NVARCHAR(24) NOT NULL,
 	[udk] NVARCHAR(24) NOT NULL,
-	[bbk] NVARCHAR(24) NOT NULL,
-	[price] MONEY NOT NULL,
+	[bbk] NVARCHAR(24) NOT NULL,	
 	[pages] INT NOT NULL,
 
 	CONSTRAINT PK__book PRIMARY KEY CLUSTERED (id),
 	CONSTRAINT FK__book_country_id FOREIGN KEY (country_id) REFERENCES [dbo].[country] (id)
+)
+GO
+CREATE TABLE [dbo].[price]
+(
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[book_id] INT NOT NULL,
+	[price] MONEY NOT NULL,
+	[discount_price] MONEY NULL,
+
+	CONSTRAINT PK__price_id PRIMARY KEY CLUSTERED(id),
+	CONSTRAINT FK__price_book_id FOREIGN KEY (book_id) REFERENCES [dbo].[book](id)
+)
+GO
+CREATE TABLE [dbo].[discount]
+(
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[discount] DECIMAL NOT NULL,
+	[book_id] INT NOT NULL,
+	[date_begin_discount] DATE NULL,
+	[date_end_discount] DATE NULL,
+
+	CONSTRAINT PK__discount_id PRIMARY KEY CLUSTERED(id),
+	CONSTRAINT FK__discount_book_id FOREIGN KEY(book_id) REFERENCES [dbo].[book](id)
 )
 GO
 CREATE TABLE [dbo].[region]

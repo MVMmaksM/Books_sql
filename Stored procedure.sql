@@ -20,10 +20,12 @@ b.isbn AS ISBN,
 b.bbk AS BBK,
 b.udk AS UDK,
 b.pages AS 'Количество страниц',
-b.price AS 'Цена'
+p.price AS 'Цена',
+p.discount_price  AS 'Цена со скидкой'
 FROM [dbo].[book] b INNER JOIN [dbo].[country] c ON b.country_id = c.id 
 INNER JOIN [dbo].[book_publishing_house] bph ON bph.book_id = b.id
 INNER JOIN [dbo].[publishing_house] ph ON ph.id = bph.publishing_house_id
+INNER JOIN [dbo].[price] p ON b.id = p.book_id
 INNER JOIN (SELECT author_book.book_id, STRING_AGG(a.last_name + ' ' + a.first_name, ', ') as 'Автор'
 FROM author a INNER JOIN author_book ON a.id = author_book.author_id
 GROUP BY author_book.book_id) query_author ON b.id = query_author.book_id
@@ -52,10 +54,12 @@ b.isbn AS ISBN,
 b.bbk AS BBK,
 b.udk AS UDK,
 b.pages AS 'Количество страниц',
-b.price AS 'Цена'
+p.price AS 'Цена',
+p.discount_price  AS 'Цена со скидкой'
 FROM [dbo].[book] b INNER JOIN [dbo].[country] c ON b.country_id = c.id 
 INNER JOIN [dbo].[book_publishing_house] bph ON bph.book_id = b.id
 INNER JOIN [dbo].[publishing_house] ph ON ph.id = bph.publishing_house_id
+INNER JOIN [dbo].[price] p ON b.id = p.book_id
 INNER JOIN (SELECT author_book.book_id, STRING_AGG(a.last_name + ' ' + a.first_name, ', ') as 'Автор'
 FROM author a INNER JOIN author_book ON a.id = author_book.author_id
 GROUP BY author_book.book_id) query_author ON b.id = query_author.book_id
@@ -86,10 +90,12 @@ b.isbn AS ISBN,
 b.bbk AS BBK,
 b.udk AS UDK,
 b.pages AS 'Количество страниц',
-b.price AS 'Цена'
+p.price AS 'Цена',
+p.discount_price  AS 'Цена со скидкой'
 FROM [dbo].[book] b INNER JOIN [dbo].[country] c ON b.country_id = c.id 
 INNER JOIN [dbo].[book_publishing_house] bph ON bph.book_id = b.id
 INNER JOIN [dbo].[publishing_house] ph ON ph.id = bph.publishing_house_id
+INNER JOIN [dbo].[price] p ON b.id = p.book_id
 INNER JOIN (SELECT author_book.book_id, STRING_AGG(a.last_name + ' ' + a.first_name, ', ') as 'Автор'
 FROM author a INNER JOIN author_book ON a.id = author_book.author_id
 GROUP BY author_book.book_id) query_author ON b.id = query_author.book_id
@@ -120,10 +126,12 @@ b.isbn AS ISBN,
 b.bbk AS BBK,
 b.udk AS UDK,
 b.pages AS 'Количество страниц',
-b.price AS 'Цена'
+p.price AS 'Цена',
+p.discount_price  AS 'Цена со скидкой'
 FROM [dbo].[book] b INNER JOIN [dbo].[country] c ON b.country_id = c.id 
 INNER JOIN [dbo].[book_publishing_house] bph ON bph.book_id = b.id
 INNER JOIN [dbo].[publishing_house] ph ON ph.id = bph.publishing_house_id
+INNER JOIN [dbo].[price] p ON b.id = p.book_id
 INNER JOIN (SELECT author_book.book_id, STRING_AGG(a.last_name + ' ' + a.first_name, ', ') as 'Автор'
 FROM author a INNER JOIN author_book ON a.id = author_book.author_id
 GROUP BY author_book.book_id) query_author ON b.id = query_author.book_id
@@ -154,10 +162,12 @@ b.isbn AS ISBN,
 b.bbk AS BBK,
 b.udk AS UDK,
 b.pages AS 'Количество страниц',
-b.price AS 'Цена'
+p.price AS 'Цена',
+p.discount_price  AS 'Цена со скидкой'
 FROM [dbo].[book] b INNER JOIN [dbo].[country] c ON b.country_id = c.id 
 INNER JOIN [dbo].[book_publishing_house] bph ON bph.book_id = b.id
 INNER JOIN [dbo].[publishing_house] ph ON ph.id = bph.publishing_house_id
+INNER JOIN [dbo].[price] p ON b.id = p.book_id
 INNER JOIN (SELECT author_book.book_id, STRING_AGG(a.last_name + ' ' + a.first_name, ', ') as 'Автор'
 FROM author a INNER JOIN author_book ON a.id = author_book.author_id
 GROUP BY author_book.book_id) query_author ON b.id = query_author.book_id
@@ -188,10 +198,12 @@ b.isbn AS ISBN,
 b.bbk AS BBK,
 b.udk AS UDK,
 b.pages AS 'Количество страниц',
-b.price AS 'Цена'
+p.price AS 'Цена',
+p.discount_price  AS 'Цена со скидкой'
 FROM [dbo].[book] b INNER JOIN [dbo].[country] c ON b.country_id = c.id 
 INNER JOIN [dbo].[book_publishing_house] bph ON bph.book_id = b.id
 INNER JOIN [dbo].[publishing_house] ph ON ph.id = bph.publishing_house_id
+INNER JOIN [dbo].[price] p ON b.id = p.book_id
 INNER JOIN (SELECT author_book.book_id, STRING_AGG(a.last_name + ' ' + a.first_name, ', ') as 'Автор'
 FROM author a INNER JOIN author_book ON a.id = author_book.author_id
 GROUP BY author_book.book_id) query_author ON b.id = query_author.book_id
@@ -201,3 +213,4 @@ GROUP BY gb.book_id) query_genre ON b.id = query_genre.book_id
 WHERE ph.name LIKE '%' + @publishing_name + '%'
 ORDER BY b.title_ru
 GO
+
