@@ -1,0 +1,108 @@
+Таблицы
+[dbo].[author] – таблица для хранения авторов
+      [first_name] – имя автора
+      [last_name] -  фамилия автора
+      [surname] – отчество автора
+
+[dbo].[book] – таблица для хранения книг
+      [title_ru] – название книги на русском
+      [title_eng] – название книги на нглийском
+      [country_id] – id страны издания книги из таблицы [dbo].[country]
+      [description] – описание книги
+      [published_year] – год публикации книги
+      [isbn] -  ISBN
+      [udk] - УДК
+      [bbk] - ББК
+      [pages] – количество страниц
+
+[dbo].[author_book] – таблица привязки авторов к книгам
+      [author_id] – id автора из таблицы [dbo].[author]
+      [book_id] – id книги из таблицы [dbo].[book]
+
+[dbo].[storage] – таблица для хранения книг на складе
+      [book_id] – id книги из таблицы [dbo].[book]
+      [amount] – количество книг на складе
+
+[dbo].[discount] – таблица для хранения скидок для книг
+      [discount] – скидка для книги в %, значение должно быть в диапазоне от 1 до 100 включительно
+      [book_id] -  id книги из таблицы [dbo].[book]
+      [date_begin_discount]- дата начала действия скидки
+      [date_end_discount] – дата окончания действия скидки
+
+
+[dbo].[genre] – таблица для хранения жанров книг
+      [name] – название жанра
+
+[dbo].[genre_book] – таблица для связки жанров с книгами
+      [genre_id] – id жанра из таблицы [dbo].[genre]
+      [book_id] – id книги из таблицы [dbo].[book]
+
+[dbo].[price] – таблица для хранения цен на книги
+      [book_id] – id книги из таблицы [dbo].[book]
+      [price] - цена
+      [discount_price] – цена со скидкой, вычисляется исходя из данных таблицы [dbo].[discount]
+
+[dbo].[order] – таблица для хранения заказов
+      [client_id] – id клиента из таблицы [dbo].[client]
+      [delivery_id] – id доставки из таблицы [dbo].[delivery]
+      [comment] – комментарии клиента к заказу
+
+[dbo].[order_details] – таблица детализации заказов
+      [book_id] – id книги из таблицы [dbo].[book]
+      [order_id] – id заказа из таблицы [dbo].[order]
+      [amount] – количество книг в заказе
+
+[dbo].[stage]- таблица этапов заказа
+      [name] – название этапа
+
+ 
+[dbo].[order_stage] – таблица связки заказов с этапом
+      [order_id] – id заказа из таблицы [dbo].[order]
+      [stage_id] – id этапа из таблицы [dbo].[stage]
+      [date_start_stage] –дата начала этапа
+      [date_end_stage]- дата завершения этапа
+
+[dbo].[delivery] – таблица доставки
+     [name] – название доставки
+
+[dbo].[client]  - таблица клиентов
+      [first_name] – имя клиента
+      [last_name] – фамилия клиента
+      [city_id] –id города из таблицы [dbo].[city]
+      [telephone] – телефон клиента
+      [email] – электронная почта клиента
+
+[dbo].[client_book_like] – таблица избранных книг клиента
+      [client_id] – id клиента из таблицы [dbo].[client]
+      [book_id] – id книги из таблицы [dbo].[book]
+
+[dbo].[region] – таблица субъектов РФ
+      [kod] – код субъекта
+      [name]  - названире субъекта
+
+[dbo].[city] – таблица городов РФ
+      [name] –название города
+      [days_delivery] – количество дней транспортировки заказа
+      [region_kod] – код субъекта РФ из таблицы [dbo].[region]
+ 
+[dbo].[country] – таблица стран 
+      [name] –название страны
+
+[dbo].[publishing_house]- таблица издательств книг
+      [name] – название издательства
+      [index] – почтовый индекс
+      [city_id] – id грода из таблицы [dbo].[city]
+      [country_id] – id страны из таблицы [dbo].[country]
+      [address] – адрес издательства
+      [telephone] - телефон
+      [email] – электронная почта
+
+[dbo].[book_publishing_house] – таблица связки издательств с книгами 
+      [book_id] – id книги из таблицы [dbo].[book]
+      [publishing_house_id] – id издательства из таблицы [dbo].[publishing_house]
+
+  
+
+
+  
+
