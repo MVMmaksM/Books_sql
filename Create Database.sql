@@ -144,28 +144,28 @@ CREATE TABLE [dbo].[delivery]
 	CONSTRAINT PK__delivery PRIMARY KEY CLUSTERED(id)
 )
 GO
-CREATE TABLE [dbo].[buy]
+CREATE TABLE [dbo].[order]
 (
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[client_id] INT NOT NULL,
 	[delivery_id] INT NOT NULL,
 	[description] NVARCHAR(255) NULL,
 
-	CONSTRAINT PK__buy_id PRIMARY KEY CLUSTERED(id),
-	CONSTRAINT FK__buy_delivery_id FOREIGN KEY(delivery_id) REFERENCES [dbo].[delivery](id),
-	CONSTRAINT FK__buy_client_id FOREIGN KEY(client_id) REFERENCES [dbo].[client](id)
+	CONSTRAINT PK__order_id PRIMARY KEY CLUSTERED(id),
+	CONSTRAINT FK__order_delivery_id FOREIGN KEY(delivery_id) REFERENCES [dbo].[delivery](id),
+	CONSTRAINT FK__order_client_id FOREIGN KEY(client_id) REFERENCES [dbo].[client](id)
 )
 GO
-CREATE TABLE [dbo].[buy_book]
+CREATE TABLE [dbo].[order_details]
 (
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[book_id] INT NOT NULL,
-	[buy_id] INT NOT NULL,
+	[order_id] INT NOT NULL,
 	[amount] INT DEFAULT 0,
 
-	CONSTRAINT PK__buy_book PRIMARY KEY CLUSTERED(id),
-	CONSTRAINT FK__buy_book_buy_id FOREIGN KEY (buy_id) REFERENCES [dbo].[buy] (id),
-	CONSTRAINT FK__buy_book_book_id FOREIGN KEY (book_id) REFERENCES [dbo].[book](id)
+	CONSTRAINT PK__order_details PRIMARY KEY CLUSTERED(id),
+	CONSTRAINT FK__order_details_order_id FOREIGN KEY (order_id) REFERENCES [dbo].[order] (id),
+	CONSTRAINT FK__order_details_book_id FOREIGN KEY (book_id) REFERENCES [dbo].[book](id)
 )
 GO
 CREATE TABLE [dbo].[stage]
@@ -176,17 +176,17 @@ CREATE TABLE [dbo].[stage]
 	CONSTRAINT PK__stage PRIMARY KEY CLUSTERED(id)
 )
 GO
-CREATE TABLE [dbo].[buy_stage]
+CREATE TABLE [dbo].[order_stage]
 (
 	[id] INT IDENTITY(1,1) NOT NULL,
-	[buy_id] INT NOT NULL,
+	[order_id] INT NOT NULL,
 	[stage_id] INT NOT NULL,
 	[date_start_stage] DATETIME NULL,
 	[date_end_stage] DATETIME NULL,
 
-	CONSTRAINT PK__buy_stage PRIMARY KEY CLUSTERED(id),
-	CONSTRAINT FK__buy_stage_buy_id FOREIGN KEY (buy_id)  REFERENCES [dbo].[buy](id),
-	CONSTRAINT FK__buy_stage_stage_id FOREIGN KEY(stage_id) REFERENCES [dbo].[stage](id)
+	CONSTRAINT PK__order_stage PRIMARY KEY CLUSTERED(id),
+	CONSTRAINT FK__order_stage_order_id FOREIGN KEY (order_id)  REFERENCES [dbo].[order](id),
+	CONSTRAINT FK__order_stage_stage_id FOREIGN KEY(stage_id) REFERENCES [dbo].[stage](id)
 )
 GO
 CREATE TABLE [dbo].[storage]

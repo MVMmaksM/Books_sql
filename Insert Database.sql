@@ -2239,9 +2239,9 @@ VALUES('1', '10'),
 ('3', '10'),
 ('3', '13')
 GO
-DELETE FROM [dbo].[buy]
+DELETE FROM [dbo].[order]
 GO
-INSERT INTO [dbo].[buy]([client_id], [delivery_id], [description])
+INSERT INTO [dbo].[order]([client_id], [delivery_id], [description])
 VALUES('1', '1', NULL),
 ('1', '2', NULL),
 ('1', '2', NULL),
@@ -2259,9 +2259,9 @@ VALUES('1', '1', NULL),
 ('3', '1', NULL),
 ('3', '1', 'Повреждена коробка')
 GO
-DELETE FROM [dbo].[buy_book]
+DELETE FROM [dbo].[order_details]
 GO
-INSERT INTO [dbo].[buy_book]([book_id], [buy_id], [amount])
+INSERT INTO [dbo].[order_details]([book_id], [order_id], [amount])
 VALUES('1', '1', '2'),
 ('5', '1', '1'),
 ('6', '1', '1'),
@@ -2282,9 +2282,9 @@ VALUES('1', '1', '2'),
 ('12', '15', '1'),
 ('1', '16', '5')
 GO
-DELETE FROM [dbo].[buy_stage]
+DELETE FROM [dbo].[order_stage]
 GO
-INSERT INTO [dbo].[buy_stage]([buy_id], [stage_id], [date_start_stage], [date_end_stage])
+INSERT INTO [dbo].[order_stage]([order_id], [stage_id], [date_start_stage], [date_end_stage])
 VALUES('1', '1', '2023-01-01 10:36', NULL),
 ('2', '1', '2023-10-01 10:48', '2023-10-01 11:05'),
 ('2', '2', '2023-12-01 09:48', '2023-12-01 11:00'),
