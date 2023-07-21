@@ -46,13 +46,14 @@ GO
 CREATE TABLE [dbo].[discount]
 (
 	[id] INT IDENTITY(1,1) NOT NULL,
-	[discount] DECIMAL NOT NULL,
+	[discount] TINYINT NOT NULL,
 	[book_id] INT NOT NULL,
 	[date_begin_discount] DATE NULL,
 	[date_end_discount] DATE NULL,
 
 	CONSTRAINT PK__discount_id PRIMARY KEY CLUSTERED(id),
-	CONSTRAINT FK__discount_book_id FOREIGN KEY(book_id) REFERENCES [dbo].[book](id)
+	CONSTRAINT FK__discount_book_id FOREIGN KEY(book_id) REFERENCES [dbo].[book](id),
+	CONSTRAINT CH_discount_discount_value CHECK(discount>0 AND discount<=100)
 )
 GO
 CREATE TABLE [dbo].[region]
@@ -171,7 +172,7 @@ CREATE TABLE [dbo].[order]
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[client_id] INT NOT NULL,
 	[delivery_id] INT NOT NULL,
-	[description] NVARCHAR(255) NULL,
+	[comment] NVARCHAR(255) NULL,
 
 	CONSTRAINT PK__order_id PRIMARY KEY CLUSTERED(id),
 	CONSTRAINT FK__order_delivery_id FOREIGN KEY(delivery_id) REFERENCES [dbo].[delivery](id),
